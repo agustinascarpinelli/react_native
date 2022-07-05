@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import TabNavigatorLogged from './Tabs/UserLogged'
@@ -7,9 +8,10 @@ import AuthStack from './Stacks/Auth'
 const MainNavigator = () => {
   const {user}=useSelector(state=>state.auth.value)
 
+
   return (
     <NavigationContainer>
-      {true?
+    {user.email ?
 
       <TabNavigatorLogged/>
       :

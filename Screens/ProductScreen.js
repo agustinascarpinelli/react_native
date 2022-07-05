@@ -8,6 +8,7 @@ import List from "../Components/List/Index"
 import { Entypo } from '@expo/vector-icons'; 
 import { useDispatch, useSelector } from "react-redux"
 import { setProductSelected } from "../Features/Products"
+import * as Animatable from 'react-native-animatable'
 
 
 const ProductScreen=({route, navigation})=>{
@@ -64,10 +65,10 @@ return (
      <Entypo name="erase" size={30} />
      </TouchableOpacity>
      </Searcher>
-     <View style={styles.listContainer}>
+     <Animatable.View style={styles.listContainer} animation='zoomIn' duration={5000}>
          <List data={productsFiltered} itemType={"Product"} onPress={handleDetailProduct}/>
-         <Button title="Go back" onPress={handleBack} />
-      </View>
+        
+      </Animatable.View>
       </View>
       </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
@@ -78,12 +79,14 @@ export default ProductScreen;
 const styles=StyleSheet.create({
     keyboardAvoid: {
         flex: 1,
+        backgroundColor:colors.black,
     },
     container:{
         flex:1,
         width:'100%',
         alignItems:'center',
         flexDirection:'column',
+        backgroundColor:colors.black,
 
     },
 
@@ -91,7 +94,7 @@ const styles=StyleSheet.create({
         width:'80%',
         padding:10,
         margin:10,
-        backgroundColor:colors.blue,
+        backgroundColor:colors.darkerWhite,
         borderRadius:10,
         color:'white',
         height:50,

@@ -1,27 +1,32 @@
-import { StyleSheet,View ,Text} from "react-native";
+import { StyleSheet,View ,Text,Image} from "react-native";
 import { colors } from "../Styles/colors";
 import React from "react";
+import * as Animatable from 'react-native-animatable'
 
-const Header=({title='Ecommerce'})=>{
+const Header=({title})=>{
     return(
-        <View style={styles.container}>
+        <Animatable.View animation='fadeInLeft' duration={5000}style={styles.container}>
             <Text style={styles.text}>{title}</Text>
-        </View>
+        </Animatable.View>
     )
 }
 export default Header;
 
 const styles=StyleSheet.create({
     container:{
-        backgroundColor:colors.lighterBlue,
         height:80,
         width:'100%',
         justifyContent:'center',
         alignItems:'center',
+        backgroundColor:colors.black
     },
     text:{ 
-        fontSize:20,
-        fontFamily:'OpenSans',
+        fontSize:17,
+        fontFamily:'Saira',
+        color:colors.white,
+        textTransform:'uppercase'
+        
        
-    }
+    },
+ 
 })

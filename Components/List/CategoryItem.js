@@ -1,35 +1,36 @@
 
-import { StyleSheet,View,Text,Dimensions,useWindowDimensions } from "react-native";
+import { StyleSheet,View,Text,Dimensions,useWindowDimensions,Image} from "react-native";
 import { colors } from "../../Styles/colors";
 import React, { useState,useEffect } from "react";
+import * as Animatable from 'react-native-animatable'
 const CategoryItem=({category})=>{
     const {width, height} = useWindowDimensions();
 
 
     return(
-        <View style={{...styles.container,
-            maxWidth: 0.43 * width,
-            maxHeight: 0.43 * height,
+        <Animatable.View animation='zoomIn' duration={5000} style={{...styles.container,
+            maxWidth: 0.50 * width,
+            maxHeight: 0.50 * height,
             margin: width < 330 ? 10: 15}}>
-            <Text style={styles.text}>{category.category}</Text>
-        </View>
+            <Image source={{uri:category.image}} style={styles.image}/>
+        </Animatable.View>
     )
 }
 
 export default CategoryItem;
 const styles=StyleSheet.create({
+    
     container:{
-        width:150,
-        height:150,
-        justifyContent:'flex-end',
-        alignItems:'flex-end',
-        padding:15,
-        backgroundColor:colors.lighterBlue,
-        margin:0.05 * Dimensions.get('window').width,
-        borderRadius:10,
+        padding:10,
+        
+
     },
 
-    text:{
-        fontSize:18,
+    image:{
+        width:160,
+        height:180,
+        borderRadius:10,
+
+      
     }
 })

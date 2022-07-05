@@ -3,16 +3,18 @@ import { useDispatch } from "react-redux";
 import { colors } from "../Styles/colors";
 import loginValidationSchema from "../Utils/validateSchemas";
 import { signUp } from "../Features/Auth";
+import { login } from "../Features/Auth";
 import { Button,StyleSheet,View,Text,TouchableOpacity } from "react-native";
 import React, {useState} from "react";
 import { Formik } from "formik";
+import { createEntityAdapter, isRejectedWithValue } from "@reduxjs/toolkit";
 const LoginScreen = () => {
     const [registerScreen, setRegisterScreen] = useState(false)
     const [passwordError,setPasswordError]=useState("")
 
     const dispatch = useDispatch()
     
-    const hadleLogin =()=> {
+    const handleLogin =()=> {
 
         const validateEmailandPassword = loginValidationSchema.validate({ email,password})
 
@@ -31,6 +33,9 @@ const LoginScreen = () => {
         }
         else{
             dispatch(login({email:values.email,password:values.password}))
+            if(login()===isRejectedWithValue){
+                setPasswordError("Wrong username or password")
+            }
         }
     }
 
@@ -47,13 +52,13 @@ const LoginScreen = () => {
                 >   
                     {({handleChange, errors, handleSubmit, values, handleBlur}) => (
                         <>
-                            <Input label="Email" password={false} onChange={handleChange('email')} value={values.email} error={errors.email} onBlur={handleBlur('email')}/>
-                            <Input label="Password" password={true} onChange={handleChange('password')} value={values.password} error={errors.password} onBlur={handleBlur('password')}/>
+                            <Input  label="Email" password={false} onChange={handleChange('email')} value={values.email} error={errors.email} onBlur={handleBlur('email')}/>
+                            <Input  label="Password" password={true} onChange={handleChange('password')} value={values.password}  onBlur={handleBlur('password')} error={passwordError}/>
                             {registerScreen && <Input label="Confirm password" password={true} onChange={handleChange('confirmPassword')} value={values.confirmPassword} onBlur={handleBlur('confirmPassword')} error={passwordError}/>}
                             {registerScreen ?
-                                <Button title="Signup" onPress={handleSubmit} />
+                             <TouchableOpacity style={styles.buttonAlign}  onPress={handleSubmit} ><Text  style={styles.button} >SignUp</Text></TouchableOpacity>
                                 :
-                                <Button title="Login" onPress={handleSubmit} />
+                                <TouchableOpacity style={styles.buttonAlign}  onPress={handleSubmit} ><Text  style={styles.button} >Login</Text></TouchableOpacity>
                             }
                             <View style={styles.textContainer}>
                                 {registerScreen ?
@@ -87,10 +92,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.lighterBlue
+        backgroundColor: colors.black,
     },
     content: {
-        backgroundColor: colors.lightBlue,
+        backgroundColor: colors.darkerWhite,
         padding: 20,
         justifyContent: 'center',
         borderRadius: 10,
@@ -104,18 +109,43 @@ const styles = StyleSheet.create({
         elevation: 12,
     },
     title: {
-        fontFamily: 'OpenSans',
+        fontFamily:'Saira',
         fontSize: 24,
-        textAlign: 'center'
+        textAlign: 'center',
+        color:colors.dark,
+        textTransform:'uppercase'
     },
     textContainer: {
         padding: 10,
-        fontFamily: 'OpenSans',
+        fontFamily: 'Saira',
         justifyContent: 'flex-start',
         alignItems: 'center'
     },
     link: {
-        color: colors.darkblue,
+        color: colors.grey,
         textDecorationLine: "underline"
-    }
+    },
+    buttonAlign:{
+        
+        alignItems:"center",
+        backgroundColor:colors.black, 
+        borderRadius:5,
+        height:30,
+        justifyContent:'center',
+        marginBottom:10,
+        marginTop:10
+        
+        
+
+    },
+    button:{
+      alignItems:"center",
+      backgroundColor:colors.black, 
+        color:colors.white,
+        textTransform:'uppercase',
+        textAlign:'center',
+        
+
+    },
+
 })

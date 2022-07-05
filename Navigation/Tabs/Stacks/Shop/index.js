@@ -9,7 +9,7 @@ const Stack =createNativeStackNavigator();
 function ShopNavigation(){
     return(
        
-        <Stack.Navigator initialRouteName="Categories" >
+        <Stack.Navigator initialRouteName="Categories"  >
                 <Stack.Screen name="Categories" component ={CategoriesScreen}options={
             {
               title: "Categories"

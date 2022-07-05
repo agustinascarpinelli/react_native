@@ -4,9 +4,10 @@ import OrderStack from "../../Stacks/Orders";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View,Text,StyleSheet } from "react-native";
 import { Feather } from '@expo/vector-icons';
-import React from "react";
+import React, { useEffect } from "react";
 import { colors } from "../../../Styles/colors";
 import { FontAwesome5 } from '@expo/vector-icons'; 
+import{useSelector}from 'react-redux'
 import LocationStack from "../../Stacks/Location";
 import { Entypo } from '@expo/vector-icons';
 
@@ -14,6 +15,9 @@ import { Entypo } from '@expo/vector-icons';
 
 const BottomTabs = createBottomTabNavigator()
 const TabNavigatorLogged = () => {
+const {cart}=useSelector(state=>state.cart.value)
+ const quantity=cart.length
+
     return (
       <BottomTabs.Navigator
         screenOptions={{
@@ -42,10 +46,12 @@ const TabNavigatorLogged = () => {
 name="CartTab"
 component={CartStack}
 options={{
+  tabBarBadge:quantity,
     tabBarIcon: ({focused})=>{
         return (
             <View style={styles.item}>
                 <Feather name="shopping-bag" size={24} color="black" />
+                <Text>Cart</Text>
 
             </View>
         )
@@ -60,13 +66,13 @@ options={{
             return (
               <View style={styles.item}>
                 <Feather name="list" size={24} color="black" />
-                <Text>Ordenes</Text>
+                <Text>Orders</Text>
               </View>
             )
           }
         }}
       />
-       <BottomTabs.Screen
+             <BottomTabs.Screen
         name="LocationTab"
         component={LocationStack}
         options={{
@@ -88,21 +94,28 @@ export default TabNavigatorLogged
 
 const styles = StyleSheet.create({
   tabBar: {
-    shadowColor: colors.lightBlue,
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.25,
-    shadowRadius: 0.25,
-    elevation: 5,
+    
+
     position: "absolute",
     bottom: 25,
+    
     left: 20,
     right: 20,
     borderRadius: 15,
-    height: 90,
-  },
-  item: {
-    flex: 1,
+    height: 75,
+    alignItems:"center",
     justifyContent: 'center',
     alignItems: 'center',
+    alignContent:'center',
+
+  },
+  item: {
+    marginTop:20,
+    marginBottom:0,
+    paddingBottom:0,
+        flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent:'center',
   }
 })

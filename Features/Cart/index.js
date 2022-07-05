@@ -2,19 +2,21 @@ import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import { PRODUCTS } from "../../Data/product";
 import { DB_URL } from "../../Constants/Firebase";
 
+
 const initialState={
 value:{
     cart:[],
     response:{},
     loading:false,
     error:false,
+    
 }
 }
 
 
 export const confirmPurchase=createAsyncThunk(
     'cart/confirm',
-     async (items, asyncThunck)=>{
+     async ({items,userId,total}, asyncThunk)=>{
         try{
             const res=await fetch(
                 `${DB_URL}orders.json`,
@@ -23,6 +25,10 @@ export const confirmPurchase=createAsyncThunk(
                     body:JSON.stringify({
                         date:new Date().toLocaleDateString(),
                         items:items,
+                        id:Math.floor(Math.random()*1000000),
+                        items:items,
+                        total:total,
+                        userId:userId
                     })
                 }
             )
@@ -33,6 +39,7 @@ export const confirmPurchase=createAsyncThunk(
         }
      }
 )
+
 
 const cartSlice=createSlice({
     name:'cart',
@@ -51,14 +58,30 @@ const cartSlice=createSlice({
                 state.value.cart.push({...product,quantity:1})
             }
         },
-        removeItem:()=>{},
+        removeItem:(state, action)=>{
+            
+            const newCart=state.value.cart.filter(product=>product.id!==action.payload.id)
+            state.value.cart=newCart
+           
+        },
+        removeCart:(state)=>{
+            state.value.cart=[]
+        }
+        
     },
     extraReducers:{
         [confirmPurchase.pending]:(state)=>{
             state.value.loading=true
         },
-        [confirmPurchase.fulfilled]:(state,{payload})=>{
-            state.value.response=payload
+        [confirmPurchase.fulfilled]:(state,{payload})=>{ const saveOrders = Object.entries(payload).map((item) => {
+            return {
+              id: item[0],
+              ...item[1],
+            };
+          });
+          state.value.response = saveOrders;
+          
+           
             state.value.loading=false
         },
         [confirmPurchase.rejected]:(state)=>{
@@ -68,5 +91,5 @@ const cartSlice=createSlice({
     }
 })
 
-export const {addItem,removeItem}=cartSlice.actions
+export const {addItem,removeItem,removeCart}=cartSlice.actions
 export default cartSlice.reducer

@@ -1,6 +1,6 @@
 import { StyleSheet,View,Text,Image,useWindowDimensions } from "react-native";
 import React from "react";
-
+import { colors } from "../../Styles/colors";
 const ProductItem=({product})=>{
     const {width, height} = useWindowDimensions();
     return(
@@ -9,7 +9,7 @@ const ProductItem=({product})=>{
             maxHeight: 0.5 * height,
             margin: width < 330 ? 10: 15}}>
             <Image source={{uri:product.image}} style={styles.image}/>
-            <Text>{product.description}</Text>
+            <Text style={styles.text}>{product.description}</Text>
         </View>
     )
 }
@@ -23,10 +23,15 @@ const styles=StyleSheet.create( {
       
     },
     container:{
-        padding:15,
-        margin:15,
+        padding:5,
+        margin:5,
    
       
     },
+    text:{
+        color:colors.white,
+        textAlign:'center',
+        marginTop:8,
+    }
 
 })

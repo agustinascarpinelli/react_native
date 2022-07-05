@@ -1,8 +1,9 @@
-import { StyleSheet, Text,View,useWindowDimensions, Image, Button, KeyboardAvoidingView, Keyboard,Platform, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, Text,View,useWindowDimensions, Image, Button, KeyboardAvoidingView, Keyboard,Platform, TouchableWithoutFeedback, TouchableOpacity } from "react-native";
 import React, {useEffect, useState} from "react";
 import Header from "../Components/Header";
 import {useDispatch, useSelector } from "react-redux";
 import { addItem } from "../Features/Cart";
+import { colors } from "../Styles/colors";
 
 const ProductDetailScreen=({
     route,
@@ -39,8 +40,8 @@ const ProductDetailScreen=({
             />
             <Text style={styles.prodDescription}>{productSelected.description}</Text>
             <Text>{productSelected.price}</Text>
-            <Button onPress={()=>handleAdd(productSelected.id)} title="Add to cart"/>
-            <Button onPress={handleBack} title='Go back'/>
+            <TouchableOpacity style={styles.button} onPress={()=>handleAdd(productSelected.id)} ><Text style={styles.buttonText}>Add to cart</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={handleBack} ><Text style={styles.buttonText}>go back</Text></TouchableOpacity>
 
         </View>
         </TouchableWithoutFeedback>
@@ -55,18 +56,33 @@ export default ProductDetailScreen
 const styles=StyleSheet.create({
     keyboardAvoid: {
         flex: 1,
+        backgroundColor:colors.black,
+    
     },
     image:{
+        width:300,
         height:300,
         marginTop:30,
+        borderRadius:5,
     },
     container:{
         flex:1,
         flexDirection:"column",
+            alignItems:'center'
     },
  
    prodDescription:{
-       fontFamily:'OpenSans',
-   }
-   
-})
+       fontFamily:'Saira',
+   },
+   button:{
+    backgroundColor:colors.darkerWhite,
+    width:100,
+    borderRadius:5,
+    marginBottom:15
+   },
+   buttonText:{
+    fontFamily:'Saira',
+    textAlign:'center',
+    textTransform:'uppercase'
+    
+   },})

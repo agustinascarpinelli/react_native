@@ -6,7 +6,7 @@ const db=SQLite.openDatabase('address.db')
 export const init = () => {
     console.log("Entra en init");
     const promise = new Promise((resolve, reject) => {
-        db.transaction(tx => {
+        db.transaction((tx) => {
             tx.executeSql('CREATE TABLE IF NOT EXISTS address(id INTEGER PRIMARY KEY NOT NULL, title TEXT NOT NULL, picture TEXT NOT NULL, address TEXT NOT NULL)',
                 [],
                 () => {

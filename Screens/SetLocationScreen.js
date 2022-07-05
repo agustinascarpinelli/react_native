@@ -1,8 +1,11 @@
-import { Button,Text,View } from "react-native";
+import { Button,Text,View,TouchableOpacity,StyleSheet } from "react-native";
 import React,{useEffect,useState} from 'react'
 import MapView, {Marker} from 'react-native-maps'
 import * as Location from 'expo-location'
 import { API_KEY } from "../Constants/Google";
+import { colors } from "../Styles/colors";
+import { Colors } from "react-native/Libraries/NewAppScreen";
+
 
 const SetLocationScreen=({navigation})=>{
 const [location, setLocation]=useState(null)
@@ -44,8 +47,10 @@ return (
     <>
         {errorMsg ?
             <Text>{errorMsg}</Text>
+          
             :
             <>
+           
                 <MapView onPress={handleLocation} initialRegion={initialRegion} style={{flex: 1}}> 
                     {location?.lat ?
                     <Marker 
@@ -61,9 +66,12 @@ return (
                     
                 
                     }
+ <TouchableOpacity style={styles.button} onPress={handleConfirm}><Text style={styles.text}  >Confirm location</Text></TouchableOpacity>
 
                 </MapView>
-                <Button title="Confirm location" onPress={handleConfirm}></Button>
+   
+
+                
             </>
         }
         {/* </View> */}
@@ -76,3 +84,31 @@ return (
 
 
 export default SetLocationScreen
+const styles=StyleSheet.create({
+
+    button:{
+        backgroundColor:colors.black,
+      marginTop:5,
+      
+        alignItems:"center",
+        alignContent:'center',
+     
+      
+        height:30,
+        borderRadius:5,
+
+    },
+    text:{
+        color:colors.white,
+        alignContent:'center',
+      paddingTop:5,
+      
+        textTransform:'uppercase',
+        borderRadius:10,
+        textAlign:'center',
+   padding:5,
+        fontSize:15,
+        fontFamily:'Saira'
+        
+    }
+})

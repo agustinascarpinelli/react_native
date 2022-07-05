@@ -14,7 +14,7 @@ return (
           },
           headerTintColor: "white",
           headerTitleStyle: {
-            fontFamily: "OpenSans",
+            fontFamily: 'Saira',
             fontSize: 28,
           },
           headerTitleAlign: "center",

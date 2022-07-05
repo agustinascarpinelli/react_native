@@ -11,21 +11,16 @@ return (
     <Stack.Navigator initialRouteName=""
         screenOptions={{
           headerStyle: {
-            backgroundColor: colors.darkblue
+            backgroundColor: colors.black
           },
-          headerTintColor: "white",
-          headerTitleStyle: {
-            fontFamily: "OpenSans",
-            fontSize: 28,
-          },
-          headerTitleAlign: "center",
+         
         }}
       >
         <Stack.Screen
           name= "auth"
           component={LoginScreen}
           options={{
-            title: "Auth"
+            title: ""
           }}
         >
         

@@ -11,7 +11,7 @@ const OrderItem=({item})=>{
     return (
         <View style={styles.order}>
             <View>
-                <Text style={styles.date}>{formatDay(item.date)}</Text>
+                <Text style={styles.date}>{item.date}</Text>
                 <Text style={styles.total}>Total: ${item.total}</Text>
             </View>
         </View>
@@ -26,15 +26,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 10,
         margin: 10,
-        borderColor: colors.lightBlue,
+        borderColor: colors.white,
         borderWidth: 1,
         borderRadius: 6,
     },
     date:{
         fontSize: 18,
+        color:colors.white
     },
     total: {
         fontSize: 18,
-        fontFamily: 'OpenSans',
+        fontFamily: 'Saira',
+        color:colors.white
     }
 })

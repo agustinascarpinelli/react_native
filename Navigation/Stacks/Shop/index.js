@@ -3,14 +3,27 @@ import ProductDetailScreen from "../../../Screens/ProductDetailScreen";
 import ProductScreen from "../../../Screens/ProductScreen";
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from "react";
+import { StyleSheet } from "react-native";
+import { colors } from "../../../Styles/colors";
 
 
 const Stack =createNativeStackNavigator();
 function ShopNavigation(){
     return(
        
-        <Stack.Navigator initialRouteName="Categories" >
-                <Stack.Screen name="Categories" component ={CategoriesScreen}options={
+        <Stack.Navigator initialRouteName="Categories"  screenOptions={{
+            headerStyle: {
+              backgroundColor: colors.black
+            },
+            headerTintColor: "white",
+            headerTitleStyle: {
+              fontFamily:'Saira',
+              fontSize: 15,
+       
+            },
+            headerTitleAlign: "center",
+          }} >
+                <Stack.Screen styles={styles.title}name="Categories" component ={CategoriesScreen}options={
             {
               title: "Categories"
             }
@@ -34,3 +47,9 @@ function ShopNavigation(){
     )
 }
 export default ShopNavigation;
+const styles=StyleSheet.create({
+    title:{
+        fontFamily:'Saira',
+        textTransform:'uppercase'
+    }
+})

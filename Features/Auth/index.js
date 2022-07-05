@@ -59,7 +59,7 @@ export const login = createAsyncThunk(
 export const authSlice=createSlice({
     name:"auth",
     initialState,
-    reducers:{ logout: (state,_) => {
+    reducers:{ logout: (state) => {
         state.value = initialState.value}},
     extraReducers:{
         [signUp.pending]:(state)=>{

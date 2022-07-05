@@ -12,7 +12,7 @@ const Input =({label,password=false, onChange, value, error=null})=>{
         secureTextEntry={password}
         value={value}
       />
-            {error? <Text style={styles.container}>{error}</Text>:null}
+            {error? <Text style={styles.error}>* {error}</Text>:null}
         </View>
     )
 }
@@ -26,23 +26,23 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start'
     },
     input: {
-        color: colors.beige,
-        backgroundColor:colors.darkblue,
+        color: colors.black,
+        backgroundColor:colors.white,
          padding: 6,
         width: '100%',
-        fontFamily: 'OpenSans',
+        fontFamily: 'Saira',
         fontSize: 18,
     },
     text: {
-        fontFamily: 'OpenSans',
+        fontFamily: 'Saira',
         fontSize: 18,
         marginBottom: 6,
-        color: 'white',
+        color: colors.dark,
     },
     error: {
-      fontFamily: 'OpenSans',
+      fontFamily: 'Saira',
       fontSize: 12,
       marginBottom: 4,
       color: 'red',
-    }
+      marginTop:10}
 })

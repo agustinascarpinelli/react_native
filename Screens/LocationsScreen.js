@@ -1,10 +1,11 @@
 import React from "react";
 import PlaceItem from "../Components/PlaceItem";
 import { useSelector } from "react-redux";
-import { FlatList, View } from "react-native";
+import { FlatList, View ,StyleSheet} from "react-native";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getLocations, removeLocationDb } from '../Features/Locations'
+import { colors } from "../Styles/colors";
 
 const renderItem=({item})=>{
     return(
@@ -29,13 +30,20 @@ const LocationsScreen =()=>{
     const { locations } = useSelector(state => state.locations.value)
  
     return(
-        <View>
+        <View style={styles.container}>
+    
             <FlatList
             data={locations}
             renderItem={renderItem}
             keyExtractor={location=>location.id}></FlatList>
 
-        </View>
-    )
+        </View>)
+         
 }
 export default LocationsScreen
+const styles=StyleSheet.create({
+    container:{
+        backgroundColor:colors.black,
+        height:'100%'
+    }
+})

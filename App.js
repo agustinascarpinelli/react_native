@@ -1,3 +1,4 @@
+
 import { StyleSheet, Text, View,ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {useFonts} from 'expo-font';
@@ -5,6 +6,7 @@ import MainNavigator from './Navigation';
 import { Provider } from 'react-redux';
 import store from './Store';
 import {init} from './DB'
+
 
 init()
 .then(()=> {console.log('Db initialized');})
@@ -15,7 +17,7 @@ init()
 
 export default function App(){
     const [loaded] = useFonts({
-       OpenSans:require( './assets/Open_Sans/static/OpenSans/OpenSans-Regular.ttf'),
+       Saira:require( './assets/Saira_Semi_Condensed/SairaSemiCondensed-Light.ttf'),
       });
       
       if (!loaded) {

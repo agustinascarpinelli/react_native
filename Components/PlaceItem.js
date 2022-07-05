@@ -24,7 +24,7 @@ const dispatch=useDispatch()
                 <Text style={styles.address}>{address}</Text>
             </View>
             <TouchableOpacity onPress={() => onRemove(id)}>
-                <Entypo name="trash" size={24} color="black" />
+                <Entypo  style={styles.trash}name="trash" size={24} color="white" />
             </TouchableOpacity>
 
 
@@ -37,13 +37,17 @@ export default PlaceItem
 const styles = StyleSheet.create({
     placeItem: {
         alignItems: 'center',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginBottom:20,
+        marginLeft:10,
+        marginRight:10,
 
     },
     image: {
         width: 70,
         height: 70,
         borderRadius: 35,
+    
 
     },
     view: {
@@ -53,12 +57,18 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
     },
     title: {
-        color: colors.darkblue,
+        color: colors.white,
+        textTransform:'uppercase',
+        textDecorationLine:'underline',
         fontSize: 18,
         marginBottom: 6,
     },
     address: {
-        color: colors.blue,
+        color: colors.white,
         fontSize: 16,
+        marginLeft:2
+    },
+    trash:{
+        marginRight:10,
     }
 })
